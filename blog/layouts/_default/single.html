@@ -1,0 +1,30 @@
+{{ define "main" }}
+<main>
+  <article>
+    <header class="page-head">
+      <p class="kicker">{{ with .Parent }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ else }}<a href="{{ "/" | relURL }}">← Início</a>{{ end }}</p>
+      <h1>{{ .Title }}<span class="dot">.</span></h1>
+      <div class="post-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02/01/2006" }}</time>
+        <span>·</span>
+        <span>{{ .ReadingTime }} min de leitura</span>
+        {{ with .Params.tipo }}<span>·</span><span>{{ . }}</span>{{ end }}
+        {{ with .Params.formato }}<span>·</span><span>{{ . }}</span>{{ end }}
+        {{ with .Params.nota }}<span>·</span><span>★ {{ . }}/10</span>{{ end }}
+      </div>
+    </header>
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+
+    <nav class="post-nav" aria-label="Navegação entre posts">
+      <div>{{ with .PrevInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}</div>
+      <div>{{ with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}</div>
+    </nav>
+  </article>
+
+  <div class="end" aria-hidden="true">{{ site.Params.mark }}</div>
+  <small>© {{ now.Year }} {{ site.Params.name }} · {{ site.Params.location }}</small>
+</main>
+{{ end }}

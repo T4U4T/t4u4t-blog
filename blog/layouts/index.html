@@ -1,0 +1,36 @@
+{{ define "main" }}
+<main>
+  <header class="page-head home-head">
+    <canvas class="rain" id="rain" aria-hidden="true"></canvas>
+    <p class="kicker">{{ site.Params.homeKicker }}</p>
+    <h1>{{ site.Params.mark }}<span class="dot">.</span></h1>
+    <p class="sub motto">{{ site.Params.tagline }}</p>
+    <p class="sub lead">{{ site.Params.homeIntro }}</p>
+  </header>
+
+  <section>
+    <h2>Explorar</h2>
+    <div class="cats">
+      {{ range where site.Sections "Section" "ne" "sobre" }}
+      <a class="cat" href="{{ .RelPermalink }}">
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Description }}</p>
+        <span class="count">{{ len .RegularPages }} {{ if eq (len .RegularPages) 1 }}post{{ else }}posts{{ end }}</span>
+      </a>
+      {{ end }}
+    </div>
+  </section>
+
+  <section>
+    <h2>Publicações recentes</h2>
+    {{ range first 12 site.RegularPages.ByDate.Reverse }}
+      {{ partial "postrow.html" (dict "page" . "section" true) }}
+    {{ else }}
+      <p class="empty">Nenhum post publicado ainda.</p>
+    {{ end }}
+  </section>
+
+  <div class="end" aria-hidden="true">{{ site.Params.mark }}</div>
+  <small>© {{ now.Year }} {{ site.Params.name }} · {{ site.Params.location }}</small>
+</main>
+{{ end }}

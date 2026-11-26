@@ -1,0 +1,45 @@
+baseURL = "https://blog.t4u4t.site/"
+languageCode = "pt-BR"
+title = "T4U4T · Blog de Thauan"
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  name = "Thauan"
+  mark = "T4U4T"
+  role = "Desenvolvedor de Software, Cientista de Dados, Pensador Crítico e Entusiasta de Infraestrutura Linux"
+  tagline = "VI VERI VENIVERSUM VIVUS VICI"
+  homeKicker = "blog.t4u4t.site"
+  homeIntro = "Tecnologia, ciência, história e filosofia: tutoriais, opiniões, hipóteses testadas e recomendações."
+  description = "Blog de Thauan (T4U4T): tutoriais, opiniões, hipóteses e recomendações sobre tecnologia, ciência, história e filosofia."
+  location = "Brasil"
+  email = "thauan.txr@gmail.com"
+  photo = "img/thauan.jpg"
+  photoAlt = "Retrato em preto e branco de Thauan, de óculos escuros, apoiado no guarda-corpo de um terraço"
+  [params.links]
+    github = "https://github.com/T4U4T"
+    linkedin = "https://www.linkedin.com/in/thauantxr/"
+
+[[menus.main]]
+  name = "Início"
+  url = "/"
+  weight = 1
+[[menus.main]]
+  name = "Tutoriais"
+  url = "/tutoriais/"
+  weight = 2
+[[menus.main]]
+  name = "Opiniões"
+  url = "/opinioes/"
+  weight = 3
+[[menus.main]]
+  name = "Hipóteses"
+  url = "/hipoteses/"
+  weight = 4
+[[menus.main]]
+  name = "Recomendações"
+  url = "/recomendacoes/"
+  weight = 5
+[[menus.main]]
+  name = "Sobre mim"
+  url = "/sobre/"
+  weight = 6

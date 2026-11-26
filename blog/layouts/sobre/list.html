@@ -1,0 +1,78 @@
+{{ define "main" }}
+{{ $d := site.Data.curriculo }}
+<section class="hero" id="inicio">
+  <div class="ph"><img src="{{ site.Params.photo | relURL }}" alt="{{ site.Params.photoAlt }}"></div>
+  <div class="txt">
+    <a class="go" href="#sobre" aria-label="Ir para Sobre"><svg viewBox="0 0 24 24"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a>
+    <p class="kicker">{{ site.Params.role }}</p>
+    <h1>{{ site.Params.name }}<span class="dot">.</span></h1>
+    <p class="sub motto">{{ site.Params.tagline }}</p>
+  </div>
+</section>
+
+<main>
+  <section id="sobre">
+    <h2>Sobre mim</h2>
+    <div class="cols">
+      {{ with $d.sobre.citacao }}
+      <blockquote class="quote-lead">
+        <p class="big">“{{ .texto }}”</p>
+        <cite>— {{ .autor }}</cite>
+      </blockquote>
+      {{ end }}
+      <div>{{ range $d.sobre.paragrafos }}<p>{{ . | markdownify }}</p>{{ end }}</div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <h2>Projetos</h2>
+    {{ range $d.projetos }}
+    <div class="row">
+      <div>
+        <h3>{{ .nome }}</h3>
+        <p class="m">{{ .tipo }}</p>
+      </div>
+      <div>
+        <p>{{ .texto }}</p>
+        {{ with .stack }}<p class="stack">{{ . }}</p>{{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </section>
+
+  <section id="competencias">
+    <h2>Formação &amp; Competências</h2>
+    <div class="skills">
+      {{ range $d.competencias.pilares }}
+      <div class="pillar">
+        <h3>{{ .titulo }}</h3>
+        <ul class="cert-list">
+          {{ range .itens }}
+          <li><strong>{{ .curso }}</strong> — {{ .instituicao }} <em>({{ .ano }})</em></li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+      {{ with $d.competencias.stack_itens }}
+      <div class="pillar">
+        <h3>{{ $d.competencias.stack_titulo }}</h3>
+        <ul class="stack-chips" aria-label="Tecnologias e ferramentas">
+          {{ range . }}<li>{{ . }}</li>{{ end }}
+        </ul>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+
+  <section id="contato" class="contact">
+    <h2>Contato</h2>
+    <p style="color:var(--mut)">{{ $d.contato.intro }}</p>
+    {{ with site.Params.email }}<a class="big" href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+    {{ with site.Params.links.linkedin }}<a class="big" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ replaceRE "^https?://(www\\.)?" "" . | replaceRE "/$" "" }}</a>{{ end }}
+    {{ with site.Params.links.github }}<a class="big" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ replaceRE "^https?://(www\\.)?" "" . | replaceRE "/$" "" }}</a>{{ end }}
+  </section>
+
+  <div class="end" aria-hidden="true">{{ site.Params.mark }}</div>
+  <small>© {{ now.Year }} {{ site.Params.name }} · {{ site.Params.location }}</small>
+</main>
+{{ end }}

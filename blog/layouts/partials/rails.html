@@ -1,0 +1,7 @@
+<div class="rail-l" aria-label="Links">
+  <i></i>
+  {{ with site.Params.links.github }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">{{ partial "icon.html" "github" }}</a>{{ end }}
+  {{ with site.Params.links.linkedin }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">{{ partial "icon.html" "linkedin" }}</a>{{ end }}
+  {{ with site.Params.email }}<a href="mailto:{{ . }}" aria-label="E-mail">{{ partial "icon.html" "mail" }}</a>{{ end }}
+</div>
+<div class="rail-r" aria-hidden="true"><b id="prog"></b></div>

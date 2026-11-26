@@ -1,0 +1,13 @@
+# Hugo build artifacts
+blog/public/
+blog/resources/_gen/
+blog/.hugo_build.lock
+public/
+resources/_gen/
+.hugo_build.lock
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*~

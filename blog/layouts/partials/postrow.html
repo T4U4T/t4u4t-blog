@@ -1,0 +1,13 @@
+{{ $p := .page }}
+<a class="row post-link" href="{{ $p.RelPermalink }}">
+  <div>
+    <h3>{{ $p.Title }}</h3>
+    <p class="m">
+      {{- if .section }}{{ $p.Parent.Title }} · {{ end -}}
+      {{ $p.Date.Format "02/01/2006" }}
+      {{- with $p.Params.tipo }} · {{ . }}{{ end -}}
+      {{- with $p.Params.nota }} · ★ {{ . }}/10{{ end -}}
+    </p>
+  </div>
+  <p>{{ with $p.Description }}{{ . }}{{ else }}{{ $p.Summary | plainify | truncate 180 }}{{ end }}</p>
+</a>

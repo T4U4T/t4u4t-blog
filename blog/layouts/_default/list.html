@@ -1,0 +1,20 @@
+{{ define "main" }}
+<main>
+  <header class="page-head">
+    <p class="kicker"><a href="{{ "/" | relURL }}">← Início</a></p>
+    <h1>{{ .Title }}<span class="dot">.</span></h1>
+    {{ with .Description }}<p class="sub">{{ . }}</p>{{ end }}
+  </header>
+
+  <section class="list-sec">
+    {{ range .Pages.ByDate.Reverse }}
+      {{ partial "postrow.html" (dict "page" . "section" false) }}
+    {{ else }}
+      <p class="empty">Nenhum post publicado ainda.</p>
+    {{ end }}
+  </section>
+
+  <div class="end" aria-hidden="true">{{ site.Params.mark }}</div>
+  <small>© {{ now.Year }} {{ site.Params.name }} · {{ site.Params.location }}</small>
+</main>
+{{ end }}

@@ -1,0 +1,12 @@
+<header class="top">
+  <a class="logo" href="{{ "/" | relURL }}" aria-label="{{ site.Params.mark }}, início">{{ site.Params.mark }}<span class="dot">.</span></a>
+  <nav aria-label="Seções">
+    {{ $cur := .RelPermalink }}
+    {{ range site.Menus.main }}
+      {{- $href := .URL | relURL -}}
+      {{- $active := cond (eq .URL "/") (eq $cur $href) (hasPrefix $cur $href) -}}
+      <a href="{{ $href }}"{{ if $active }} class="on" aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{ end }}
+  </nav>
+  <span class="where">{{ site.Params.location }}</span>
+</header>
