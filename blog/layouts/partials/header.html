@@ -1,4 +1,4 @@
-<header class="top">
+<header class="top" id="top-bar">
   <a class="logo" href="{{ "/" | relURL }}" aria-label="{{ site.Params.mark }}, início">{{ site.Params.mark }}<span class="dot">.</span></a>
   <nav aria-label="Seções">
     {{ $cur := .RelPermalink }}
@@ -8,5 +8,11 @@
       <a href="{{ $href }}"{{ if $active }} class="on" aria-current="page"{{ end }}>{{ .Name }}</a>
     {{ end }}
   </nav>
-  <span class="where">{{ site.Params.location }}</span>
+  <div class="top-meta">
+    <span class="where">{{ site.Params.location }}</span>
+    <button class="theme-btn" id="theme-toggle" type="button" aria-label="Ativar modo claro de leitura" title="Alternar modo claro / escuro">
+      {{ partial "icon.html" "sun" }}
+      {{ partial "icon.html" "moon" }}
+    </button>
+  </div>
 </header>
