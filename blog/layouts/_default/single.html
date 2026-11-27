@@ -2,6 +2,7 @@
 <main>
   <article>
     <header class="page-head">
+      <canvas class="rain" id="rain" aria-hidden="true"></canvas>
       <p class="kicker">{{ with .Parent }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ else }}<a href="{{ "/" | relURL }}">← Início</a>{{ end }}</p>
       <h1>{{ partial "title-dot.html" .Title }}</h1>
       <div class="post-meta">

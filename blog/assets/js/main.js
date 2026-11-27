@@ -105,7 +105,7 @@ var onThemeUpdate=null;
     for(var i=0;i<n;i++){
       cols.push({
         x:i*size*1.5,
-        y:-Math.random()*h,
+        y:(Math.random()*1.2-0.35)*h,
         v:.35+Math.random()*.55,
         o:Math.floor(Math.random()*word.length),
         g:[]

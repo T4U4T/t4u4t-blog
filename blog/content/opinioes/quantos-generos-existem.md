@@ -1,6 +1,6 @@
 ---
 title: "Quantos gêneros existem?"
-date: 2026-11-27T01:09:00-03:00
+date: 2026-08-15T01:09:00-03:00
 description: "Uma análise separando o que é biologia evolutiva, neuropsicologia e sociologia na discussão sobre gênero e sexualidade."
 draft: false
 ---

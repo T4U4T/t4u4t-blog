@@ -1,6 +1,7 @@
 {{ define "main" }}
 {{ $d := site.Data.curriculo }}
 <section class="hero" id="inicio">
+  <canvas class="rain rain-l" id="rain" aria-hidden="true"></canvas>
   <div class="ph"><img src="{{ site.Params.photo | relURL }}" alt="{{ site.Params.photoAlt }}"></div>
   <div class="txt">
     <a class="go" href="#sobre" aria-label="Ir para Sobre"><svg viewBox="0 0 24 24"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a>
