@@ -51,13 +51,48 @@ var onThemeUpdate=null;
 /* Chuva discreta "T4U4T" (home) */
 (function(){
   var cv=document.getElementById('rain');if(!cv||!cv.getContext)return;
-  var ctx=cv.getContext('2d'),word='T4U4T',size=16,trail=11,w=0,h=0,cols=[],last=0,raf=0,visible=true;
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx=cv.getContext('2d'),word='T4U4T',size=16,w=0,h=0,cols=[],last=0,raf=0,visible=true;
   var color='#8d8e94';
 
   function readColor(){
     var v=getComputedStyle(document.documentElement).getPropertyValue('--rain');
     color=(v||'#8d8e94').trim()||'#8d8e94';
+  }
+
+  function step(){
+    for(var i=0;i<cols.length;i++){
+      var c=cols[i],next=[];
+      for(var j=0;j<c.g.length;j++){
+        var g=c.g[j];
+        g.a*=0.91;
+        if(g.a>=0.025)next.push(g);
+      }
+      c.g=next;
+      if(c.y>=-size&&c.y<=h+size){
+        c.g.push({y:c.y,ch:word.charAt(c.o%word.length),a:0.55});
+      }
+      c.o++;
+      c.y+=size*c.v*1.1;
+      if(c.y>h+size){
+        c.y=-size*Math.random()*12;
+        c.v=.35+Math.random()*.55;
+        c.o=Math.floor(Math.random()*word.length);
+      }
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle=color;
+    for(var i=0;i<cols.length;i++){
+      var c=cols[i];
+      for(var j=0;j<c.g.length;j++){
+        var g=c.g[j];
+        ctx.globalAlpha=g.a;
+        ctx.fillText(g.ch,c.x,g.y);
+      }
+    }
+    ctx.globalAlpha=1;
   }
 
   function setup(){
@@ -72,70 +107,29 @@ var onThemeUpdate=null;
         x:i*size*1.5,
         y:-Math.random()*h,
         v:.35+Math.random()*.55,
-        o:Math.floor(Math.random()*word.length)
+        o:Math.floor(Math.random()*word.length),
+        g:[]
       });
     }
+    for(var s=0;s<24;s++)step();
     ctx.clearRect(0,0,w,h);
-  }
-
-  function drawFrame(){
-    ctx.clearRect(0,0,w,h);
-    ctx.fillStyle=color;
-    for(var i=0;i<cols.length;i++){
-      var c=cols[i];
-      for(var k=0;k<trail;k++){
-        var y=c.y-k*size*1.12;
-        if(y<-size||y>h)continue;
-        var alpha=0.60*(1-k/trail);
-        if(alpha<=0.03)continue;
-        var chIdx=(c.o-k)%word.length;
-        if(chIdx<0)chIdx+=word.length;
-        ctx.globalAlpha=alpha;
-        ctx.fillText(word.charAt(chIdx),c.x,y);
-      }
-    }
-    ctx.globalAlpha=1;
   }
 
   function frame(t){
     raf=requestAnimationFrame(frame);
-    if(!visible||t-last<55)return;
+    if(document.hidden||!visible||t-last<55)return;
     last=t;
-    for(var i=0;i<cols.length;i++){
-      var c=cols[i];
-      c.o++;
-      c.y+=size*c.v*1.1;
-      if(c.y-(trail*size*1.12)>h){
-        c.y=-size*Math.random()*10;
-        c.v=.35+Math.random()*.55;
-        c.o=Math.floor(Math.random()*word.length);
-      }
-    }
-    drawFrame();
-  }
-
-  function drawStatic(){
-    ctx.clearRect(0,0,w,h);
-    ctx.fillStyle=color;
-    ctx.globalAlpha=.28;
-    for(var i=0;i<cols.length;i++){
-      for(var y=(i%3)*size,k=0;y<h;y+=size*1.2,k++){
-        ctx.fillText(word.charAt((i+k)%word.length),cols[i].x,y);
-      }
-    }
-    ctx.globalAlpha=1;
+    step();
+    draw();
   }
 
   onThemeUpdate=function(){
     readColor();
-    if(reduce){drawStatic();}
-    else{drawFrame();}
+    draw();
   };
 
-  readColor();setup();
-  if(reduce){drawStatic();return;}
-  drawFrame();
+  readColor();setup();draw();
   raf=requestAnimationFrame(frame);
-  addEventListener('resize',function(){setup();if(reduce){drawStatic();}else{drawFrame();}});
+  addEventListener('resize',function(){setup();draw();});
   if('IntersectionObserver' in window)new IntersectionObserver(function(e){visible=e[0].isIntersecting}).observe(cv);
 })();
