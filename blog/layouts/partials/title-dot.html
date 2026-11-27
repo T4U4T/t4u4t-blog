@@ -1,0 +1,8 @@
+{{- $t := strings.TrimSpace . -}}
+{{- $m := findRE "[.?!…:;]+$" $t -}}
+{{- if gt (len $m) 0 -}}
+  {{- $p := index $m 0 -}}
+  {{- strings.TrimSuffix $p $t -}}<span class="dot">{{ $p }}</span>
+{{- else -}}
+  {{- $t -}}<span class="dot">.</span>
+{{- end -}}

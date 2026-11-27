@@ -43,3 +43,10 @@ disableKinds = ["taxonomy", "term"]
   name = "Sobre mim"
   url = "/sobre/"
   weight = 6
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.extras]
+        [markup.goldmark.extensions.extras.mark]
+          enable = true

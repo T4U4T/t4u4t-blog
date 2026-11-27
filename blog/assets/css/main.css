@@ -4,6 +4,7 @@
   --fg:#ededec; --body-fg:#b8b9be; --mut:#8a8b91; --rain:#8d8e94;
   --line:#26272c; --end-stroke:#28292f;
   --accent:#cba6f7; --accent-ink:#0d0d0f; --accent-soft:rgba(203,166,247,.11); --accent-border:rgba(203,166,247,.30);
+  --mark-bg:rgba(203,166,247,.20); --mark-fg:#f3e8ff; --mark-line:rgba(203,166,247,.38);
   --code-bg:rgba(255,255,255,.08); --pre-bg:#131317;
   --filter:brightness(.62) contrast(1.12); --hero-opacity:1;
   color-scheme:dark; box-sizing:border-box;
@@ -17,6 +18,7 @@
   --fg:#111113; --body-fg:#17171a; --mut:#383a40; --rain:#1c1d22;
   --line:#d4d2c8; --end-stroke:#bdbab0;
   --accent:#8839ef; --accent-ink:#ffffff; --accent-soft:rgba(136,57,239,.09); --accent-border:rgba(136,57,239,.32);
+  --mark-bg:rgba(136,57,239,.14); --mark-fg:#2b0d57; --mark-line:rgba(136,57,239,.34);
   --code-bg:rgba(17,17,19,.07); --pre-bg:#ebe9e0;
   --filter:grayscale(1) contrast(1.06) brightness(1.04); --hero-opacity:.78;
   color-scheme:light;
@@ -129,7 +131,11 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.2vw,2.4re
 .prose>*+*{margin-top:1.35rem}
 .prose h2{font-size:clamp(1.3rem,2.6vw,1.8rem);margin-top:2.8rem;margin-bottom:.8rem}
 .prose h3{font-family:var(--display);font-weight:700;font-size:1.1rem;letter-spacing:-.03em;margin-top:2rem;margin-bottom:.5rem}
+.prose h4{font-family:var(--display);font-weight:700;font-size:.98rem;letter-spacing:-.02em;color:var(--accent);margin-top:1.75rem;margin-bottom:.45rem}
 .prose p,.prose li{color:var(--body-fg)}
+.prose strong{color:var(--fg);font-weight:700}
+mark,.prose mark{background:var(--mark-bg);color:var(--mark-fg);border-bottom:1px solid var(--mark-line);padding:.05em .24em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.prose mark strong{color:inherit}
 .prose ul,.prose ol{padding-left:1.3rem}
 .prose li+li{margin-top:.45rem}
 .prose li::marker{color:var(--accent)}

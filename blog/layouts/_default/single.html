@@ -3,7 +3,7 @@
   <article>
     <header class="page-head">
       <p class="kicker">{{ with .Parent }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ else }}<a href="{{ "/" | relURL }}">← Início</a>{{ end }}</p>
-      <h1>{{ .Title }}<span class="dot">.</span></h1>
+      <h1>{{ partial "title-dot.html" .Title }}</h1>
       <div class="post-meta">
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02/01/2006" }}</time>
         <span>·</span>
