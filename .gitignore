@@ -11,3 +11,6 @@ resources/_gen/
 Thumbs.db
 *.swp
 *~
+
+# Daily news cache
+.daily_news.json
